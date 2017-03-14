@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="FuncParser">
+      <UniqueIdentifier>{ca3203d5-907a-4a01-8a97-5b79c99ea5b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuncParser\Managed Code">
+      <UniqueIdentifier>{27b8b51c-c2e8-46d0-9595-b0a2d7739790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuncParser\Managed Code\Source Files">
+      <UniqueIdentifier>{24c6a2cc-afc1-403d-ae45-8e101634db66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuncParser\Managed Code\Header Files">
+      <UniqueIdentifier>{3a0e81cf-4628-4ed9-a5db-fbd371ed834a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuncParser\Header Files">
+      <UniqueIdentifier>{0cfdc6d9-2c64-4cd6-8586-ad13526c66df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuncParser\Source Files">
+      <UniqueIdentifier>{674197c7-4523-4d6c-b07c-f43087a07ec5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\Conversions.cpp">
+      <Filter>FuncParser\Managed Code\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ExceptionHelper.cpp">
+      <Filter>FuncParser\Managed Code\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedDimensionParser.cpp">
+      <Filter>FuncParser\Managed Code\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedFuncParser.cpp">
+      <Filter>FuncParser\Managed Code\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedFuncParserErrorData.cpp">
+      <Filter>FuncParser\Managed Code\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedParsedFunction.cpp">
+      <Filter>FuncParser\Managed Code\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\Constant.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\Constants.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\DimensionInfo.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\DimensionParser.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\ElemFunction.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\ElemFunctions.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\FuncNode.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\FuncParser.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\FuncParserErrorData.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\Math.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\ParsedFunction.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\QuantityDimensionInfo.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\StringHelper.cpp">
+      <Filter>FuncParser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DimensionParserSpecs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FuncParserSpecs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParsedFunctionSpecs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\FuncParser\Managed\Include\FuncParserManaged\Conversions.h">
+      <Filter>FuncParser\Managed Code\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Managed\Include\FuncParserManaged\ExceptionHelper.h">
+      <Filter>FuncParser\Managed Code\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Managed\Include\FuncParserManaged\ManagedDimensionParser.h">
+      <Filter>FuncParser\Managed Code\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Managed\Include\FuncParserManaged\ManagedFuncParserErrorData.h">
+      <Filter>FuncParser\Managed Code\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Managed\Include\FuncParserManaged\ManagedParsedFunction.h">
+      <Filter>FuncParser\Managed Code\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\Constant.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\Constants.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\DimensionInfo.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\DimensionParser.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\ElemFunction.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\ElemFunctions.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\FuncNode.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\FuncParser.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\FuncParserErrorData.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\FuncParserTypeDefs.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Managed\Include\FuncParserManaged\ManagedFuncParser.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\Math.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\ParsedFunction.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\QuantityDimensionInfo.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FuncParser\Include\FuncParser\StringHelper.h">
+      <Filter>FuncParser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\SPSuite.FuncParser\managed\include\FuncParserManaged\ManagedFuncParser.h">
+      <Filter>FuncParser\Managed Code\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
