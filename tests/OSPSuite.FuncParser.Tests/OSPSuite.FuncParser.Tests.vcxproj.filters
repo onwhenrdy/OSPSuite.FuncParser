@@ -33,63 +33,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\Conversions.cpp">
-      <Filter>FuncParser\Managed Code\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ExceptionHelper.cpp">
-      <Filter>FuncParser\Managed Code\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedDimensionParser.cpp">
-      <Filter>FuncParser\Managed Code\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedFuncParser.cpp">
-      <Filter>FuncParser\Managed Code\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedFuncParserErrorData.cpp">
-      <Filter>FuncParser\Managed Code\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\managed\src\ManagedParsedFunction.cpp">
-      <Filter>FuncParser\Managed Code\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\Constant.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\Constants.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\DimensionInfo.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\DimensionParser.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\ElemFunction.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\ElemFunctions.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\FuncNode.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\FuncParser.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\FuncParserErrorData.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\Math.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\ParsedFunction.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\QuantityDimensionInfo.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\SPSuite.FuncParser\src\StringHelper.cpp">
-      <Filter>FuncParser\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\DimensionParserSpecs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -100,6 +43,63 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ParsedFunctionSpecs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\managed\src\Conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\managed\src\ExceptionHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\managed\src\ManagedDimensionParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\managed\src\ManagedFuncParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\managed\src\ManagedFuncParserErrorData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\managed\src\ManagedParsedFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\Constant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\Constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\DimensionInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\DimensionParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\ElemFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\ElemFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\FuncNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\FuncParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\FuncParserErrorData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\Math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\ParsedFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\QuantityDimensionInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OSPSuite.FuncParser\src\StringHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,8 +164,8 @@
     <ClInclude Include="..\FuncParser\Include\FuncParser\StringHelper.h">
       <Filter>FuncParser\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\SPSuite.FuncParser\managed\include\FuncParserManaged\ManagedFuncParser.h">
-      <Filter>FuncParser\Managed Code\Header Files</Filter>
+    <ClInclude Include="..\..\src\OSPSuite.FuncParser\managed\include\FuncParserManaged\ManagedFuncParser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

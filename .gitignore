@@ -250,3 +250,8 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+Build
+/src/OSPSuite.FuncParser/ReleaseX64
+/tests/OSPSuite.FuncParser.Tests/ReleaseX64
+/00/*.7z
+/01_COnversionVS2017_Versuch#1/*.7z
