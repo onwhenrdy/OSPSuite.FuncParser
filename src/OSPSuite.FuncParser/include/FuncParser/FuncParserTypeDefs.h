@@ -1,7 +1,7 @@
 #ifndef _FuncParserTypeDefs_H_
 #define _FuncParserTypeDefs_H_
 
-#ifdef WIN32
+#ifdef _WINDOWS
 // Disable warning about truncation of type name to 255 characters
 #pragma warning(disable:4786)
 #endif
@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 
-#ifdef WIN32
+#ifdef _WINDOWS
 #define FUNCPARSER_EXPORT __declspec(dllexport)
 #endif
 #ifdef linux

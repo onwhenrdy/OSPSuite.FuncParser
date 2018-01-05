@@ -1,4 +1,4 @@
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(push,off)
 #endif
 
@@ -12,11 +12,11 @@
 #include "FuncParser/Math.h"
 
 
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(pop)
 #endif
 
-#ifdef WIN32
+#ifdef _WINDOWS
 #pragma warning( disable : 4996)
 #endif
 
@@ -71,7 +71,7 @@ std::string FuncParser::ToUpper (const std::string & Source)
 
 std::string FuncParser::StringReplace (const std::string & source, const char * find, const char * replace, bool CaseSensitive /*= true*/)
 {
-	int iPos=0;
+	size_t iPos=0;
 	std::string str=source;
 
 	if(!find)
@@ -87,7 +87,7 @@ std::string FuncParser::StringReplace (const std::string & source, const char * 
 	}
 
 	iPos=str.find_first_of(_find[0]);
-	while(iPos >= 0)
+	while(iPos != std::string::npos)
 	{
 		std::string substr = str.substr(iPos, strlen(_find));
 		if (!CaseSensitive)
@@ -535,7 +535,7 @@ void FuncParser::EvalComparison (FuncNode * SubNode, std::string SubExpr, FuncPa
 	try
 	{
         long BracketsCount;
-        size_t i;
+        unsigned int i;
 		std::string NextCharacter;
 		std::string SubSubExpr;
 		long FirstOperandLastPosition, SecondOperandFirstPosition;
@@ -625,7 +625,7 @@ void FuncParser::EvalFactor (FuncNode * SubNode, std::string SubExpr, FuncParser
 
 	try
 	{
-        size_t i;
+        unsigned int i;
 		std::string FuncName, VarName;
 		long BracketsCount;
         size_t CharPos;

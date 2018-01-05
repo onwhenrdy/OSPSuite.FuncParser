@@ -1,9 +1,9 @@
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(push,off)
 #endif
 
 #include "FuncParser/Math.h"
-#ifdef WIN32
+#ifdef _WINDOWS
 
 #include <math.h>
 #include <ymath.h>
@@ -13,7 +13,7 @@
 #include <cmath>
 #endif
 
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(pop)
 #endif
 
@@ -22,7 +22,7 @@ namespace FuncParserNative
 
 double Math::GetNaN ()
 {
-#ifdef WIN32
+#ifdef _WINDOWS
 	return _Nan._Double;
 #endif
 #ifdef linux 
@@ -32,7 +32,7 @@ double Math::GetNaN ()
 
 bool Math::IsNaN (double d)
 {
-#ifdef WIN32
+#ifdef _WINDOWS
 	return _isnan(d) ? true : false;
 #endif
 #ifdef linux
@@ -42,7 +42,7 @@ bool Math::IsNaN (double d)
 
 double Math::GetInf ()
 {
-#ifdef WIN32
+#ifdef _WINDOWS
 	return _Inf._Double;
 #endif
 #ifdef linux
@@ -57,7 +57,7 @@ double Math::GetNegInf ()
 
 bool Math::IsFinite (double d)
 {
-#ifdef WIN32
+#ifdef _WINDOWS
 	return _finite(d) ? true : false;
 #endif
 #ifdef linux

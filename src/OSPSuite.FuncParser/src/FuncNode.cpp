@@ -1,4 +1,4 @@
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(push,off)
 #endif
 
@@ -9,11 +9,11 @@
 #include <deque>
 #include "FuncParser/ElemFunctions.h"
 
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(pop)
 #endif
 
-#ifdef WIN32
+#ifdef _WINDOWS
 #pragma warning( disable : 4996)
 #endif
 

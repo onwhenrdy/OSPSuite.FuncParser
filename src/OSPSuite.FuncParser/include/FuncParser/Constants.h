@@ -1,7 +1,7 @@
 #ifndef _Constants_H_
 #define _Constants_H_
 
-#ifdef WIN32
+#ifdef _WINDOWS
 // Disable warning about truncation of type name to 255 characters
 #pragma warning(disable:4786)
 #endif
@@ -9,7 +9,7 @@
 #include <map>
 #include <string>
 #include "FuncParser/Constant.h"
-#ifdef WIN32
+#ifdef _WINDOWS
 #include <ymath.h>
 
 #endif

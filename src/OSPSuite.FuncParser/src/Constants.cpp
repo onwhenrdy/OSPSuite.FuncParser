@@ -1,4 +1,4 @@
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(push,off)
 #endif
 
@@ -7,11 +7,11 @@
 #include "FuncParser/Constant.h"
 #include <vector>
 
-#ifdef WIN32
+#ifdef _WINDOWS
 #include <math.h>
 #endif
 
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(pop)
 #endif
 
@@ -61,7 +61,7 @@ bool Constants::Exists (const std::string & Key)
 
 int Constants::GetCount ()
 {
-	return m_ElemConstants.size();
+	return (unsigned int)m_ElemConstants.size();
 }
 
 const std::string Constants::GetList () const

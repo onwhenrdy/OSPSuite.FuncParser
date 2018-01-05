@@ -1,4 +1,4 @@
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(push,off)
 #endif
 
@@ -9,11 +9,11 @@
 #include <vector>
 #include <assert.h>
 
-#ifdef WIN32_PRODUCTION
+#ifdef _WINDOWS_PRODUCTION
 #pragma managed(pop)
 #endif
 
-#ifdef WIN32
+#ifdef _WINDOWS
 #pragma warning( disable : 4996)
 #endif
 
@@ -84,7 +84,7 @@ ElemFunctions * ElemFunctions::GetInstance ()
 	tmpElemFunctions.push_back(new EF_RND());
 	tmpElemFunctions.push_back(new EF_SRND());	
 
-	_numberOfElemFunctions = tmpElemFunctions.size();
+	_numberOfElemFunctions = (unsigned int)tmpElemFunctions.size();
 
 	_elemFunctions     = new ElemFunction * [_numberOfElemFunctions];
 	_elemFunctionKeys  = new char * [_numberOfElemFunctions];

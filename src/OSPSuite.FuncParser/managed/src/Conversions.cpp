@@ -68,7 +68,7 @@ namespace OSPSuite
 
 		array<double>^ CPPToNETConversions::DoubleVectorToArray(const std::vector<double> & doubleVec)
 		{
-			array<double>^ doubleArray = gcnew array<double>(doubleVec.size());;
+			array<double>^ doubleArray = gcnew array<double>((unsigned int)doubleVec.size());;
 
 			for (unsigned int i = 0; i < doubleVec.size(); i++)
 				doubleArray[i] = doubleVec[i];
@@ -78,7 +78,7 @@ namespace OSPSuite
 
 		array<System::String^>^ CPPToNETConversions::StringVectorToArray(const std::vector<std::string> & stringVec)
 		{
-			array<System::String^>^ stringArray = gcnew array<System::String^>(stringVec.size());;
+			array<System::String^>^ stringArray = gcnew array<System::String^>((unsigned int)stringVec.size());;
 
 			for (unsigned int i = 0; i < stringVec.size(); i++)
 				stringArray[i] = MarshalString(stringVec[i]);
