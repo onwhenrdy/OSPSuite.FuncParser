@@ -36,7 +36,7 @@ bool Math::IsNaN (double d)
 	return _isnan(d) ? true : false;
 #endif
 #ifdef linux
-	return isnan(d);
+	return std::isnan(d);
 #endif
 }
 

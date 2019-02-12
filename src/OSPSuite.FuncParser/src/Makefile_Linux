@@ -2,35 +2,8 @@ CC = g++
 
 OBJECTS = Constant.o \
 	Constants.o \
-	EF_ACOS.o \
-	EF_AND.o \
-	EF_ASIN.o \
-	EF_ATAN.o \
-	EF_COS.o \
-	EF_COSH.o \
-	EF_DIV.o \
-	EF_EQUAL.o \
-	EF_EXP.o \
-	EF_GREATER.o \
-	EF_GREATEREQUAL.o \
-	EF_LESS.o \
-	EF_LESSEQUAL.o \
-	EF_LN.o \
-	EF_LOG10.o \
-	EF_LOG.o \
-	EF_MINUS.o \
-	EF_MUL.o \
-	EF_NOT.o \
-	EF_OR.o \
-	EF_PLUS.o \
-	EF_POWER.o \
-	EF_SIN.o \
-	EF_SINH.o \
-	EF_SQRT.o \
-	EF_TAN.o \
-	EF_TANH.o \
-	EF_UNEQUAL2.o \
-	EF_UNEQUAL.o \
+	DimensionInfo.o \
+	DimensionParser.o \
 	ElemFunction.o \
 	ElemFunctions.o \
 	FuncNode.o \
@@ -38,10 +11,11 @@ OBJECTS = Constant.o \
 	FuncParserErrorData.o \
 	Math.o \
 	ParsedFunction.o \
+	QuantityDimensionInfo.o \
 	StringHelper.o
 
 
-CFLAGS = -I../Include/FuncParser/ -O3
+CFLAGS = -I../include -O3 -fPIC
 
 LFLAGS = 
 
@@ -61,161 +35,73 @@ dep:
 
 # Automatically generated dependencies
 # (use g++ -MM *.cpp)
-Constant.o: Constant.cpp ../Include/FuncParser/Constant.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-Constants.o: Constants.cpp ../Include/FuncParser/Constants.h \
-  ../Include/FuncParser/Constant.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h \
-  ../Include/FuncParser/FuncParserErrorData.h
-EF_ACOS.o: EF_ACOS.cpp ../Include/FuncParser/EF_ACOS.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_AND.o: EF_AND.cpp ../Include/FuncParser/EF_AND.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/FuncParser.h ../Include/FuncParser/Constants.h \
-  ../Include/FuncParser/Constant.h ../Include/FuncParser/ElemFunctions.h \
-  ../Include/FuncParser/FuncNode.h ../Include/FuncParser/StringHelper.h
-EF_ASIN.o: EF_ASIN.cpp ../Include/FuncParser/EF_ASIN.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_ATAN.o: EF_ATAN.cpp ../Include/FuncParser/EF_ATAN.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_COS.o: EF_COS.cpp ../Include/FuncParser/EF_COS.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_COSH.o: EF_COSH.cpp ../Include/FuncParser/EF_COSH.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_DIV.o: EF_DIV.cpp ../Include/FuncParser/EF_DIV.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_EQUAL.o: EF_EQUAL.cpp ../Include/FuncParser/EF_EQUAL.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_EXP.o: EF_EXP.cpp ../Include/FuncParser/EF_EXP.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_GREATER.o: EF_GREATER.cpp ../Include/FuncParser/EF_GREATER.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_GREATEREQUAL.o: EF_GREATEREQUAL.cpp \
-  ../Include/FuncParser/EF_GREATEREQUAL.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_LESS.o: EF_LESS.cpp ../Include/FuncParser/EF_LESS.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_LESSEQUAL.o: EF_LESSEQUAL.cpp ../Include/FuncParser/EF_LESSEQUAL.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_LN.o: EF_LN.cpp ../Include/FuncParser/EF_LN.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_LOG10.o: EF_LOG10.cpp ../Include/FuncParser/EF_LOG10.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_LOG.o: EF_LOG.cpp ../Include/FuncParser/EF_LOG.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_MINUS.o: EF_MINUS.cpp ../Include/FuncParser/EF_MINUS.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_MUL.o: EF_MUL.cpp ../Include/FuncParser/EF_MUL.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_NOT.o: EF_NOT.cpp ../Include/FuncParser/EF_NOT.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/FuncParser.h ../Include/FuncParser/Constants.h \
-  ../Include/FuncParser/Constant.h ../Include/FuncParser/ElemFunctions.h \
-  ../Include/FuncParser/FuncNode.h ../Include/FuncParser/StringHelper.h
-EF_OR.o: EF_OR.cpp ../Include/FuncParser/EF_OR.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/FuncParser.h ../Include/FuncParser/Constants.h \
-  ../Include/FuncParser/Constant.h ../Include/FuncParser/ElemFunctions.h \
-  ../Include/FuncParser/FuncNode.h ../Include/FuncParser/StringHelper.h
-EF_PLUS.o: EF_PLUS.cpp ../Include/FuncParser/EF_PLUS.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_POWER.o: EF_POWER.cpp ../Include/FuncParser/EF_POWER.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_SIN.o: EF_SIN.cpp ../Include/FuncParser/EF_SIN.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_SINH.o: EF_SINH.cpp ../Include/FuncParser/EF_SINH.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_SQRT.o: EF_SQRT.cpp ../Include/FuncParser/EF_SQRT.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_TAN.o: EF_TAN.cpp ../Include/FuncParser/EF_TAN.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_TANH.o: EF_TANH.cpp ../Include/FuncParser/EF_TANH.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_UNEQUAL2.o: EF_UNEQUAL2.cpp ../Include/FuncParser/EF_UNEQUAL2.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-EF_UNEQUAL.o: EF_UNEQUAL.cpp ../Include/FuncParser/EF_UNEQUAL.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h
-ElemFunction.o: ElemFunction.cpp ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/FuncNode.h ../Include/FuncParser/StringHelper.h \
-  ../Include/FuncParser/FuncParserErrorData.h \
-  ../Include/FuncParser/FuncParser.h ../Include/FuncParser/Constants.h \
-  ../Include/FuncParser/Constant.h ../Include/FuncParser/ElemFunctions.h
-ElemFunctions.o: ElemFunctions.cpp ../Include/FuncParser/ElemFunctions.h \
-  ../Include/FuncParser/ElemFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/FuncParserErrorData.h \
-  ../Include/FuncParser/EF_ATAN.h ../Include/FuncParser/EF_SQRT.h \
-  ../Include/FuncParser/EF_AND.h ../Include/FuncParser/EF_DIV.h \
-  ../Include/FuncParser/EF_COSH.h ../Include/FuncParser/EF_GREATER.h \
-  ../Include/FuncParser/EF_UNEQUAL.h ../Include/FuncParser/EF_LESS.h \
-  ../Include/FuncParser/EF_OR.h ../Include/FuncParser/EF_COS.h \
-  ../Include/FuncParser/EF_EXP.h ../Include/FuncParser/EF_SINH.h \
-  ../Include/FuncParser/EF_TAN.h ../Include/FuncParser/EF_EQUAL.h \
-  ../Include/FuncParser/EF_LOG.h ../Include/FuncParser/EF_SIN.h \
-  ../Include/FuncParser/EF_LN.h ../Include/FuncParser/EF_GREATEREQUAL.h \
-  ../Include/FuncParser/EF_PLUS.h ../Include/FuncParser/EF_TANH.h \
-  ../Include/FuncParser/EF_NOT.h ../Include/FuncParser/EF_POWER.h \
-  ../Include/FuncParser/EF_MINUS.h ../Include/FuncParser/EF_MUL.h \
-  ../Include/FuncParser/EF_LOG10.h ../Include/FuncParser/EF_ASIN.h \
-  ../Include/FuncParser/EF_ACOS.h ../Include/FuncParser/EF_LESSEQUAL.h \
-  ../Include/FuncParser/EF_UNEQUAL2.h
-FuncNode.o: FuncNode.cpp ../Include/FuncParser/FuncNode.h \
-  ../Include/FuncParser/Math.h ../Include/FuncParser/FuncParserTypeDefs.h \
-  ../Include/FuncParser/StringHelper.h \
-  ../Include/FuncParser/FuncParserErrorData.h \
-  ../Include/FuncParser/ElemFunction.h ../Include/FuncParser/FuncParser.h \
-  ../Include/FuncParser/Constants.h ../Include/FuncParser/Constant.h \
-  ../Include/FuncParser/ElemFunctions.h
-FuncParser.o: FuncParser.cpp ../Include/FuncParser/FuncParser.h \
-  ../Include/FuncParser/Constants.h ../Include/FuncParser/Constant.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h \
-  ../Include/FuncParser/ElemFunctions.h \
-  ../Include/FuncParser/ElemFunction.h ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/FuncNode.h ../Include/FuncParser/StringHelper.h \
-  ../Include/FuncParser/FuncParserErrorData.h
+Constant.o: Constant.cpp ../include/FuncParser/Constant.h \
+ ../include/FuncParser/FuncParserTypeDefs.h ../include/FuncParser/Math.h
+Constants.o: Constants.cpp ../include/FuncParser/Constants.h \
+ ../include/FuncParser/Constant.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/FuncParserErrorData.h
+DimensionInfo.o: DimensionInfo.cpp ../include/FuncParser/DimensionInfo.h \
+ ../include/FuncParser/ElemFunction.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/FuncParserErrorData.h ../include/FuncParser/Math.h
+DimensionParser.o: DimensionParser.cpp \
+ ../include/FuncParser/FuncParserErrorData.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/DimensionParser.h \
+ ../include/FuncParser/QuantityDimensionInfo.h \
+ ../include/FuncParser/DimensionInfo.h \
+ ../include/FuncParser/ElemFunction.h ../include/FuncParser/Math.h \
+ ../include/FuncParser/ParsedFunction.h
+ElemFunction.o: ElemFunction.cpp ../include/FuncParser/ElemFunction.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/FuncParserErrorData.h ../include/FuncParser/Math.h \
+ ../include/FuncParser/FuncNode.h ../include/FuncParser/StringHelper.h \
+ ../include/FuncParser/DimensionInfo.h \
+ ../include/FuncParser/QuantityDimensionInfo.h \
+ ../include/FuncParser/FuncParser.h ../include/FuncParser/Constants.h \
+ ../include/FuncParser/Constant.h ../include/FuncParser/ElemFunctions.h
+ElemFunctions.o: ElemFunctions.cpp ../include/FuncParser/ElemFunctions.h \
+ ../include/FuncParser/ElemFunction.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/FuncParserErrorData.h ../include/FuncParser/Math.h
+FuncNode.o: FuncNode.cpp ../include/FuncParser/FuncNode.h \
+ ../include/FuncParser/Math.h ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/StringHelper.h \
+ ../include/FuncParser/DimensionInfo.h \
+ ../include/FuncParser/ElemFunction.h \
+ ../include/FuncParser/FuncParserErrorData.h \
+ ../include/FuncParser/QuantityDimensionInfo.h \
+ ../include/FuncParser/FuncParser.h ../include/FuncParser/Constants.h \
+ ../include/FuncParser/Constant.h ../include/FuncParser/ElemFunctions.h
+FuncParser.o: FuncParser.cpp ../include/FuncParser/FuncParser.h \
+ ../include/FuncParser/Constants.h ../include/FuncParser/Constant.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/ElemFunctions.h \
+ ../include/FuncParser/ElemFunction.h \
+ ../include/FuncParser/FuncParserErrorData.h ../include/FuncParser/Math.h \
+ ../include/FuncParser/FuncNode.h ../include/FuncParser/StringHelper.h \
+ ../include/FuncParser/DimensionInfo.h \
+ ../include/FuncParser/QuantityDimensionInfo.h
 FuncParserErrorData.o: FuncParserErrorData.cpp \
-  ../Include/FuncParser/FuncParserErrorData.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h
-Math.o: Math.cpp ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h
+ ../include/FuncParser/FuncParserErrorData.h \
+ ../include/FuncParser/FuncParserTypeDefs.h
+Math.o: Math.cpp ../include/FuncParser/Math.h \
+ ../include/FuncParser/FuncParserTypeDefs.h
 ParsedFunction.o: ParsedFunction.cpp \
-  ../Include/FuncParser/ParsedFunction.h \
-  ../Include/FuncParser/FuncParserTypeDefs.h \
-  ../Include/FuncParser/FuncNode.h ../Include/FuncParser/Math.h \
-  ../Include/FuncParser/StringHelper.h \
-  ../Include/FuncParser/FuncParserErrorData.h \
-  ../Include/FuncParser/FuncParser.h ../Include/FuncParser/Constants.h \
-  ../Include/FuncParser/Constant.h ../Include/FuncParser/ElemFunctions.h \
-  ../Include/FuncParser/ElemFunction.h
-StringHelper.o: StringHelper.cpp ../Include/FuncParser/StringHelper.h
-
+ ../include/FuncParser/FuncParserErrorData.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/ParsedFunction.h \
+ ../include/FuncParser/QuantityDimensionInfo.h \
+ ../include/FuncParser/DimensionInfo.h \
+ ../include/FuncParser/ElemFunction.h ../include/FuncParser/Math.h \
+ ../include/FuncParser/FuncNode.h ../include/FuncParser/StringHelper.h \
+ ../include/FuncParser/FuncParser.h ../include/FuncParser/Constants.h \
+ ../include/FuncParser/Constant.h ../include/FuncParser/ElemFunctions.h
+QuantityDimensionInfo.o: QuantityDimensionInfo.cpp \
+ ../include/FuncParser/QuantityDimensionInfo.h \
+ ../include/FuncParser/DimensionInfo.h \
+ ../include/FuncParser/ElemFunction.h \
+ ../include/FuncParser/FuncParserTypeDefs.h \
+ ../include/FuncParser/FuncParserErrorData.h ../include/FuncParser/Math.h
+StringHelper.o: StringHelper.cpp ../include/FuncParser/StringHelper.h
