@@ -5,7 +5,7 @@ using OSPSuite.BDDHelper.Extensions;
 
 namespace OSPSuite.FuncParser.DimensionParserTests
 {
-   public abstract class concern_for_dimension_parser : ContextSpecification<DimensionParser>
+   public abstract class concern_for_DimensionParser : ContextSpecification<DimensionParser>
    {
       protected IList<QuantityDimensionInformation> _quantityDimensionInfos=new List<QuantityDimensionInformation>();
 
@@ -33,7 +33,7 @@ namespace OSPSuite.FuncParser.DimensionParserTests
 
    }
 
-   public class when_getting_formula_dimension : concern_for_dimension_parser
+   public class when_getting_formula_dimension : concern_for_DimensionParser
    {
       [Observation]
       [TestCaseSource(nameof(TestData))]
@@ -124,7 +124,7 @@ namespace OSPSuite.FuncParser.DimensionParserTests
       }
    }
 
-   public class when_getting_dimension_for_invalid_formula : concern_for_dimension_parser
+   public class when_getting_dimension_for_invalid_formula : concern_for_DimensionParser
    {
       [Observation]
       [TestCaseSource(nameof(TestData))]
@@ -145,7 +145,7 @@ namespace OSPSuite.FuncParser.DimensionParserTests
       }
    }
 
-   public class when_cannot_calculate_dimension_for_valid_formula : concern_for_dimension_parser
+   public class when_cannot_calculate_dimension_for_valid_formula : concern_for_DimensionParser
    {
       [Observation]
       [TestCaseSource(nameof(TestData))]

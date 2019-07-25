@@ -7,7 +7,7 @@ using OSPSuite.BDDHelper.Extensions;
 
 namespace OSPSuite.FuncParser.ParsedFunctionTests
 {
-   public abstract class concern_for_parsed_function : ContextSpecification<ParsedFunction>
+   public abstract class concern_for_ParsedFunction : ContextSpecification<ParsedFunction>
    {
       // ---------------------------------------------------------------------------
       // values of variables and parameters used in all test expressions
@@ -167,7 +167,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
    //  3: SimplifyParametersAllowed = true but some parameters set to "not to be simplified"
    //(besides that, Parsed Functions are equal)
    // For every function, value is calculated via FuncParser and compared to directly calculated value
-   public class when_calculating_expressions : concern_for_parsed_function
+   public class when_calculating_expressions : concern_for_ParsedFunction
    {
       [Observation]
       [TestCaseSource(nameof(TestData))]
@@ -208,7 +208,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       public void Dummy(){}
    }
 
-   public class when_getting_xml_string : concern_for_parsed_function
+   public class when_getting_xml_string : concern_for_ParsedFunction
    {
       [Observation]
       [TestCaseSource(nameof(TestData))]
@@ -234,7 +234,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       }
    }
 
-   public class when_parsing_invalid_expression : concern_for_parsed_function
+   public class when_parsing_invalid_expression : concern_for_ParsedFunction
    {
       [Observation]
       [TestCaseSource(nameof(InvalidTestData))]
@@ -245,7 +245,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       }
    }
 
-   public class when_calculating_invalid_expression : concern_for_parsed_function
+   public class when_calculating_invalid_expression : concern_for_ParsedFunction
    {
       [Observation]
       [TestCaseSource(nameof(InvalidTestData))]
@@ -256,7 +256,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       }
    }
 
-   public class when_setting_invalid_number_of_parameters_or_variables : concern_for_parsed_function
+   public class when_setting_invalid_number_of_parameters_or_variables : concern_for_ParsedFunction
    {
       protected override void Context()
       {
@@ -289,7 +289,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       }
    }
 
-   public class when_setting_variable_or_parameter_names_case_sensitive : concern_for_parsed_function
+   public class when_setting_variable_or_parameter_names_case_sensitive : concern_for_ParsedFunction
    {
       protected override void Context()
       {
@@ -315,7 +315,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       }
    }
 
-   public class when_setting_variable_or_parameter_names_case_insensitive : concern_for_parsed_function
+   public class when_setting_variable_or_parameter_names_case_insensitive : concern_for_ParsedFunction
    {
       protected override void Context()
       {
@@ -361,7 +361,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       }
    }
 
-   public class when_expression_contains_numeric_logical_mix : concern_for_parsed_function
+   public class when_expression_contains_numeric_logical_mix : concern_for_ParsedFunction
    {
       protected override void Context()
       {
@@ -384,7 +384,7 @@ namespace OSPSuite.FuncParser.ParsedFunctionTests
       }
    }
 
-   public class when_calculating_random_function : concern_for_parsed_function
+   public class when_calculating_random_function : concern_for_ParsedFunction
    {
       protected override void Context()
       {

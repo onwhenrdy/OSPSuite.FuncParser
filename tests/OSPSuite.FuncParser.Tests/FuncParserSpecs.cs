@@ -5,7 +5,7 @@ using OSPSuite.BDDHelper.Extensions;
 
 namespace OSPSuite.FuncParser.FuncParserTests
 {
-   public abstract class concern_for_func_parser : ContextSpecification<FuncParser>
+   public abstract class concern_for_FuncParser : ContextSpecification<FuncParser>
    {
       protected override void Context()
       {
@@ -14,7 +14,7 @@ namespace OSPSuite.FuncParser.FuncParserTests
 
    }
 
-   public class when_testing_variable_or_parameter_names : concern_for_func_parser
+   public class when_testing_variable_or_parameter_names : concern_for_FuncParser
    {
       [Observation]
       [TestCaseSource(nameof(TestData))]
