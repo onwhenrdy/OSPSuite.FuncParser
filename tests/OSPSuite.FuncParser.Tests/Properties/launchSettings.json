@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OSPSuite.FuncParser.Tests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

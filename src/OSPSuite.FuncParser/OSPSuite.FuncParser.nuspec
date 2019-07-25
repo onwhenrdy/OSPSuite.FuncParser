@@ -11,31 +11,25 @@
     <licenseUrl>https://github.com/Open-Systems-Pharmacology/OSPSuite.FuncParser/blob/master/LICENSE</licenseUrl>
     <iconUrl>https://raw.githubusercontent.com/Open-Systems-Pharmacology/Suite/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright © 2017 - Open Systems Pharmacology Community</copyright>
+    <copyright>Copyright © 2019 - Open Systems Pharmacology Community</copyright>
     <tags>open-systems-pharmacology</tags>
   </metadata>
   <files>
-    <file src="..\..\Build\Debug\Win32\OSPSuite.FuncParser.dll" target="OSPSuite.FuncParser\bin\native\x86\Debug" />
-    <file src="..\..\Build\Debug\Win32\OSPSuite.FuncParser.lib" target="OSPSuite.FuncParser\bin\native\x86\Debug" />
-    <file src="..\..\Build\Debug\Win32\OSPSuite.FuncParser.pdb" target="OSPSuite.FuncParser\bin\native\x86\Debug" />
-    
-    <file src="..\..\Build\Release\Win32\OSPSuite.FuncParser.dll" target="OSPSuite.FuncParser\bin\native\x86\Release" />
-    <file src="..\..\Build\Release\Win32\OSPSuite.FuncParser.lib" target="OSPSuite.FuncParser\bin\native\x86\Release" />
-    <file src="..\..\Build\Release\Win32\OSPSuite.FuncParser.pdb" target="OSPSuite.FuncParser\bin\native\x86\Release" />
+    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.dll" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
+    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.lib" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
+    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.pdb" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
 
-    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParser.dll" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
-    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParser.lib" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
-    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParser.pdb" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
  
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParser.dll" target="OSPSuite.FuncParser\bin\native\x64\Release" />
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParser.lib" target="OSPSuite.FuncParser\bin\native\x64\Release" />
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParser.pdb" target="OSPSuite.FuncParser\bin\native\x64\Release" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.dll" target="OSPSuite.FuncParser\bin\native\x64\Release" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.lib" target="OSPSuite.FuncParser\bin\native\x64\Release" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.pdb" target="OSPSuite.FuncParser\bin\native\x64\Release" />
 
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParser.dll" target="lib\net45" />
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParser.lib" target="lib\net45" />
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParser.pdb" target="lib\net45" />
+    <file src="bin\Release\netstandard2.0\OSPSuite.FuncParser.dll" target="lib\net45" />
+    <file src="bin\Release\netstandard2.0\OSPSuite.FuncParser.pdb" target="lib\net45" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.dll" target="lib\net45" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.lib" target="lib\net45" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.pdb" target="lib\net45" />
 
-    <file src="include\**\*.h" target="OSPSuite.FuncParser\include" />
-    <file src="managed\include\**\*.h" target="OSPSuite.FuncParser\include" />
+    <file src="..\OSPSuite.FuncParserNative\include\**\*.h" target="OSPSuite.FuncParserNative\include" />
   </files>
 </package>

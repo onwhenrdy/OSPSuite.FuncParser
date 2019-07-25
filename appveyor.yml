@@ -1,16 +1,14 @@
-image: Visual Studio 2017
+image: Visual Studio 2019
 
 environment:
-  major: 3
+  major: 4
   minor: 0
-  release: 1
+  release: 0
   app_version: '$(major).$(minor).$(release).$(APPVEYOR_BUILD_NUMBER)'
 
 version: '$(major).$(minor).$(release).{build}'
 
 build_script:
-  - cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Debug;Platform=Win32 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Release;Platform=Win32 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Debug;Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Release;Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
@@ -19,9 +17,8 @@ cache:
 
 before_build:
   - nuget sources add -name bddhelper -source https://ci.appveyor.com/nuget/ospsuite-bddhelper 
-  - nuget install packages.config -OutputDirectory packages # cannot use automatic artifact publish because it's not recognized in a C++/CLI project
-  - ps: (get-content src\OSPSuite.FuncParser\version.h) | foreach-object {$_ -replace "RELEASE 0", "RELEASE $env:RELEASE" -replace "MAJOR 0", "MAJOR $env:MAJOR" -replace "MINOR 0", "MINOR $env:MINOR" -replace "BUILD 0", "BUILD $env:APPVEYOR_BUILD_NUMBER"} | set-content src\OSPSuite.FuncParser\version.h
-
+  - ps: (get-content src\OSPSuite.FuncParserNative\version.h) | foreach-object {$_ -replace "RELEASE 0", "RELEASE $env:RELEASE" -replace "MAJOR 0", "MAJOR $env:MAJOR" -replace "MINOR 0", "MINOR $env:MINOR" -replace "BUILD 0", "BUILD $env:APPVEYOR_BUILD_NUMBER"} | set-content src\OSPSuite.FuncParser\version.h
+  - dotnet restore
 
 after_build:
   - cmd: nuget pack src\OSPSuite.FuncParser\OSPSuite.FuncParser.nuspec -version %app_version%
@@ -29,8 +26,7 @@ after_build:
 
 test:
   assemblies:
-  - '**\*.Tests.Release.Win32.dll'
-  - '**\*.Tests.Release.x64.dll'
+  - '**\*.Tests.dll'
 
 skip_commits:
   files:
