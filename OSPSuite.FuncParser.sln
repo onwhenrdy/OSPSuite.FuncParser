@@ -16,16 +16,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSPSuite.FuncParser", "src\
 		{2661A715-1870-403C-9563-5C3CDC31974A} = {2661A715-1870-403C-9563-5C3CDC31974A}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{7F27E837-F210-41B0-A35A-5AEC99F816F3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2661A715-1870-403C-9563-5C3CDC31974A} = {2661A715-1870-403C-9563-5C3CDC31974A}
-		{405249DA-7835-474A-B627-C2DBBC6D580B} = {405249DA-7835-474A-B627-C2DBBC6D580B}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OSPSuite.FuncParser.Tests", "tests\OSPSuite.FuncParser.Tests\OSPSuite.FuncParser.Tests.csproj", "{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2661A715-1870-403C-9563-5C3CDC31974A} = {2661A715-1870-403C-9563-5C3CDC31974A}
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAppNetCore", "tests\TestAppNetCore\TestAppNetCore.csproj", "{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{393E925C-E2F6-42FA-BE44-E807946414C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +47,6 @@ Global
 		{405249DA-7835-474A-B627-C2DBBC6D580B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{405249DA-7835-474A-B627-C2DBBC6D580B}.Release|x64.ActiveCfg = Release|Any CPU
 		{405249DA-7835-474A-B627-C2DBBC6D580B}.Release|x64.Build.0 = Release|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Debug|x64.Build.0 = Debug|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Release|x64.ActiveCfg = Release|Any CPU
-		{7F27E837-F210-41B0-A35A-5AEC99F816F3}.Release|x64.Build.0 = Release|Any CPU
 		{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -65,9 +55,21 @@ Global
 		{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1}.Release|x64.ActiveCfg = Release|Any CPU
 		{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1}.Release|x64.Build.0 = Release|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Debug|x64.Build.0 = Debug|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Release|x64.ActiveCfg = Release|Any CPU
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EBB0F97-6C6B-4A42-80B7-EC7BDD5610B1} = {393E925C-E2F6-42FA-BE44-E807946414C0}
+		{E5F8B8E5-D8A1-48C9-AB71-FC28340725E8} = {393E925C-E2F6-42FA-BE44-E807946414C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .
