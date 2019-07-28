@@ -15,17 +15,17 @@
     <tags>open-systems-pharmacology</tags>
   </metadata>
   <files>
-    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.dll" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
-    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.lib" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
-    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.pdb" target="OSPSuite.FuncParser\bin\native\x64\Debug" />
+    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.dll" target="OSPSuite.FuncParserNative\bin\native\x64\Debug" />
+    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.lib" target="OSPSuite.FuncParserNative\bin\native\x64\Debug" />
+    <file src="..\..\Build\Debug\x64\OSPSuite.FuncParserNative.pdb" target="OSPSuite.FuncParserNative\bin\native\x64\Debug" />
 
  
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.dll" target="OSPSuite.FuncParser\bin\native\x64\Release" />
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.lib" target="OSPSuite.FuncParser\bin\native\x64\Release" />
-    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.pdb" target="OSPSuite.FuncParser\bin\native\x64\Release" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.dll" target="OSPSuite.FuncParserNative\bin\native\x64\Release" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.lib" target="OSPSuite.FuncParserNative\bin\native\x64\Release" />
+    <file src="..\..\Build\Release\x64\OSPSuite.FuncParserNative.pdb" target="OSPSuite.FuncParserNative\bin\native\x64\Release" />
 
-    <file src="bin\Release\netstandard2.0\OSPSuite.FuncParser.dll" target="lib\net45" />
-    <file src="bin\Release\netstandard2.0\OSPSuite.FuncParser.pdb" target="lib\net45" />
+    <file src="bin\Release\netstandard2.0\OSPSuite.FuncParser.dll" target="lib\netstandard2.0" />
+    <file src="bin\Release\netstandard2.0\OSPSuite.FuncParser.pdb" target="lib\netstandard2.0" />
 
     <file src="..\OSPSuite.FuncParserNative\include\**\*.h" target="OSPSuite.FuncParserNative\include" />
   </files>
