@@ -1,4 +1,6 @@
-image: Visual Studio 2019
+image: 
+#- Visual Studio 2019
+- Ubuntu1804
 
 environment:
   major: 4
@@ -9,8 +11,8 @@ environment:
 version: "$(major).$(minor).$(release).{build}"
 
 build_script:
-  - cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Debug;Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Release;Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  #- cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Debug;Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  #- cmd: msbuild OSPSuite.FuncParser.sln /property:Configuration=Release;Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 before_build:
   - nuget sources add -name bddhelper -source https://ci.appveyor.com/nuget/ospsuite-bddhelper
@@ -18,11 +20,11 @@ before_build:
   - dotnet restore
 
 after_build:
-  - cmd: nuget pack src\OSPSuite.FuncParser\OSPSuite.FuncParser.nuspec -version %app_version%
-  - ps: Get-ChildItem .\OSPSuite.FuncParser.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  #- cmd: nuget pack src\OSPSuite.FuncParser\OSPSuite.FuncParser.nuspec -version %app_version%
+  #- ps: Get-ChildItem .\OSPSuite.FuncParser.*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 test_script:
-  - cmd: dotnet test --no-build --no-restore --logger:Appveyor
+  #- cmd: dotnet test --no-build --no-restore --logger:Appveyor
 
 skip_branch_with_pr: true
 
