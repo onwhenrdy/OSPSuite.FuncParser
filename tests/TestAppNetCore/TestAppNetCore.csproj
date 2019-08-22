@@ -8,18 +8,12 @@
     <RootNamespace>TestAppNetCore</RootNamespace>
   </PropertyGroup>
 
-		<Choose> 
-			<When Condition=" '$(OS)' == 'Unix' ">
-				<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-					<Exec Command="cp '$(SolutionDir)Build/$(ConfigurationName)/x64/libOSPSuite.FuncParserNative.so' '$(ProjectDir)$(OutDir)'" />
-				</Target>
-			</When>
-			<When Condition=" '$(OS)' != 'Unix' ">
-				<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-					<Exec Command="copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.dll&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.pdb&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.lib&quot; &quot;$(ProjectDir)$(OutDir)&quot;" />
-				</Target>
-			</When>
-		</Choose> 
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' != 'Windows_NT' " >
+		<Exec Command="cp '$(SolutionDir)Build/$(ConfigurationName)/x64/libOSPSuite.FuncParserNative.so' '$(ProjectDir)$(OutDir)'" />
+	</Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
+		<Exec Command="copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.dll&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.pdb&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.lib&quot; &quot;$(ProjectDir)$(OutDir)&quot;" />
+	</Target>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\OSPSuite.FuncParser\OSPSuite.FuncParser.csproj" />
