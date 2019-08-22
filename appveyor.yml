@@ -19,7 +19,7 @@ build_script:
   - sh: dotnet build OSPSuite.FuncParser.sln /property:Configuration=Debug;Platform=x64
   - sh: dotnet build OSPSuite.FuncParser.sln /property:Configuration=Release;Platform=x64
 
-before_build:
+before_build: 
   - ps: (get-content src\OSPSuite.FuncParserNative\version.h) | foreach-object {$_ -replace "RELEASE 0", "RELEASE $env:RELEASE" -replace "MAJOR 0", "MAJOR $env:MAJOR" -replace "MINOR 0", "MINOR $env:MINOR" -replace "BUILD 0", "BUILD $env:APPVEYOR_BUILD_NUMBER"} | set-content src\OSPSuite.FuncParser\version.h
   - ps: dotnet restore --source https://ci.appveyor.com/nuget/ospsuite-bddhelper --source https://www.nuget.org/api/v2/
   - sh: sed -i '/{2661A715-1870-403C-9563-5C3CDC31974A}./d' OSPSuite.FuncParser.sln
