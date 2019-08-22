@@ -8,7 +8,7 @@
     <RootNamespace>TestAppNetCore</RootNamespace>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="!$(OS.Contains('Unix'))">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' != 'Unix' ">
     <Exec Command="copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.dll&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.pdb&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.lib&quot; &quot;$(ProjectDir)$(OutDir)&quot;" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(OS.Contains('Unix'))">
