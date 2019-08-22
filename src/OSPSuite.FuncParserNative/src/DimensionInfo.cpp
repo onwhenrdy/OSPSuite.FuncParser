@@ -6,25 +6,28 @@ namespace FuncParserNative
 {
 	DimensionInfo::DimensionInfo()
 	{
-		Reset();
-	}
+        Reset();
+    }
 
-	DimensionInfo::DimensionInfo(double length, double mass, double time, 
-  							     double electricCurrent, double temperature, 
-								 double amount, double luminousIntensity)
-	{
-		_length = length;
-		_mass = mass;
-		_time = time;
-		_electricCurrent = electricCurrent;
-		_temperature = temperature;
-		_amount = amount;
-		_luminousIntensity = luminousIntensity;
-	}
-	
-	//set all exponents=0 (unitless dimension)
-	void DimensionInfo::Reset()
-	{
+    DimensionInfo::DimensionInfo(double length,
+                                 double mass,
+                                 double time,
+                                 double electricCurrent,
+                                 double temperature,
+                                 double amount,
+                                 double luminousIntensity)
+        : _length(length)
+        , _mass(mass)
+        , _time(time)
+        , _electricCurrent(electricCurrent)
+        , _temperature(temperature)
+        , _amount(amount)
+        , _luminousIntensity(luminousIntensity)
+    {}
+
+    //set all exponents=0 (unitless dimension)
+    void DimensionInfo::Reset()
+    {
 		_length = 0.0;
 		_mass = 0.0;
 		_time = 0.0;
@@ -92,11 +95,12 @@ namespace FuncParserNative
 		_luminousIntensity = luminousIntensity;
 	}
 
-	void DimensionInfo::TransformBy(const DimensionInfo & dimensionInfo,
-						            ElemFunction * elemFunction,
-									double secondOperand, 
-									bool isFirstOperandConst, bool isSecondOperandConst)
-	{
+    void DimensionInfo::TransformBy(const DimensionInfo &dimensionInfo,
+                                    ElemFunction *elemFunction,
+                                    double secondOperand,
+                                    bool isFirstOperandConst,
+                                    bool isSecondOperandConst)
+    {
 		_length = elemFunction->CalculateDimensionExponent(_length, 
 			dimensionInfo.GetLength(), secondOperand, isFirstOperandConst, isSecondOperandConst);
 

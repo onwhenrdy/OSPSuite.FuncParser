@@ -62,8 +62,8 @@ class FuncNode
 		const FuncNodeType GetNodeType () const;
 		void SetNodeType (FuncNodeType nodeType);
 		FuncNode * Clone ();
-		const double CalcNodeValue (double * Args, double * Params, double ComparisonTolerance);
-		bool SimplifyNode (double & NewValue, const IndexVector & FixedParametersIndexVector, double ComparisonTolerance, double * ParameterValues = NULL);
+        const double CalcNodeValue(const double *Args, double *Params, double ComparisonTolerance);
+        bool SimplifyNode (double & NewValue, const IndexVector & FixedParametersIndexVector, double ComparisonTolerance, double * ParameterValues = NULL);
 		bool IsNumericNode ();
 		std::string XMLString (const std::vector < std::string > & VariableNames, const std::vector < std::string > & ParamNames);
 

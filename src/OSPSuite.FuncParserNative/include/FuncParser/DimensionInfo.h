@@ -9,7 +9,7 @@ namespace FuncParserNative
 class DimensionInfo
 {
 protected:
-	double _length;
+    double _length;
     double _mass;
     double _time;
     double _electricCurrent;

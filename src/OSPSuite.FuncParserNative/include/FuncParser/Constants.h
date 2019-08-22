@@ -8,16 +8,6 @@
 
 #include <map>
 #include <string>
-#include "FuncParser/Constant.h"
-#ifdef _WINDOWS
-#include <ymath.h>
-
-#endif
-#ifdef linux
-#include <cmath>
-#endif
-
-#include "FuncParser/FuncParserTypeDefs.h"
 
 namespace FuncParserNative
 {
@@ -25,19 +15,17 @@ namespace FuncParserNative
 class Constant;
 
 class Constants
-{	
-	private:
-		typedef std::map < std::string , Constant * >::iterator ElemConstIterator ;
-		typedef std::map < std::string , Constant * >::const_iterator ElemConstIteratorConst ;
-		std::map < std::string , Constant * > _elemConstants;
-	
-	public:
-		Constants ();
-		~Constants ();
-		const Constant * operator [ ] (const std::string & Key) const;
-		bool Exists (const std::string & Key);
-		int GetCount ();
-		const std::string GetList () const;
+{
+private:
+    std::map<std::string, Constant *> _elemConstants;
+
+public:
+    Constants();
+    ~Constants();
+    const Constant *operator[](const std::string &Key) const;
+    bool Exists(const std::string &Key) const;
+    int GetCount() const;
+    std::string GetList() const;
 };
 
 }//.. end "namespace FuncParserNative"

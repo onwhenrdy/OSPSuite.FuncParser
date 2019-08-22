@@ -1,19 +1,17 @@
 #include "FuncParser/StringHelper.h"
+
+#include <algorithm>
+#include <cctype>
 #include <string>
 
 namespace FuncParserNative
 {
-
-std::string StringHelper::Capitalize (const std::string & pInString)
+std::string StringHelper::Capitalize(std::string pInString)
 {
-	char * NewStr = new char[pInString.size()+1];
-	const char *csource = pInString.c_str();
-    for(size_t i=0; i<pInString.size(); i++)
-		NewStr[i] = i==0 ? toupper(csource[i]) : tolower(csource[i]);
-	NewStr[pInString.size()] = '\0';
-	std::string newString = NewStr;
-	delete[] NewStr;
-	return newString;
+    std::transform(pInString.begin(), pInString.end(), pInString.begin(), [](unsigned char c) {
+        return std::toupper(c);
+    });
+    return pInString;
 }
 
-}//.. end "namespace FuncParserNative"
+} // namespace FuncParserNative

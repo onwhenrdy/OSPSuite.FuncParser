@@ -2,7 +2,6 @@
 #define _Constant_H_
 
 #include <string>
-#include "FuncParser/FuncParserTypeDefs.h"
 
 namespace FuncParserNative
 {
@@ -10,13 +9,13 @@ namespace FuncParserNative
 class Constant
 {	
 	private:
-		std::string _name;
-		double _value;
-	
-	public:
-		Constant (const std::string & Name, double Value);
-		const std::string & GetName () const ;
-		const double GetValue () const;
+        std::string _name;
+        double _value;
+
+    public:
+        Constant(std::string Name, double Value);
+        const std::string &GetName() const;
+        double GetValue() const;
 };
 
 }//.. end "namespace FuncParserNative"

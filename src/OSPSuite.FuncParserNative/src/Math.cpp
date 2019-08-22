@@ -1,45 +1,23 @@
 #include "FuncParser/Math.h"
-#ifdef _WINDOWS
 
-#include <math.h>
-#include <ymath.h>
-#include <float.h>
-#endif
-#ifdef linux
 #include <cmath>
-#endif
+#include <limits>
 
 namespace FuncParserNative
 {
-
-double Math::GetNaN ()
+double Math::GetNaN()
 {
-#ifdef _WINDOWS
-	return _Nan._Double;
-#endif
-#ifdef linux 
-	return NAN;
-#endif
+    return (std::numeric_limits<double>::quiet_NaN());
 }
 
-bool Math::IsNaN (double d)
+bool Math::IsNaN(double d)
 {
-#ifdef _WINDOWS
-	return _isnan(d) ? true : false;
-#endif
-#ifdef linux
-	return std::isnan(d);
-#endif
+    return (std::isnan(d));
 }
 
 double Math::GetInf ()
 {
-#ifdef _WINDOWS
-	return _Inf._Double;
-#endif
-#ifdef linux
-	return INFINITY;
-#endif
+    return (std::numeric_limits<double>::infinity());
 }
 
 double Math::GetNegInf ()
@@ -49,25 +27,19 @@ double Math::GetNegInf ()
 
 bool Math::IsFinite (double d)
 {
-#ifdef _WINDOWS
-	return _finite(d) ? true : false;
-#endif
-#ifdef linux
-	return (finite(d) != 0);
-#endif
+    return (std::isfinite(d));
 }
 
 bool Math::IsInf (double d)
 {
-	return (d==GetInf());
+    return (d == GetInf());
 }
 
 bool Math::IsNegInf (double d)
 {
-	return (d==GetNegInf());
+    return (d == GetNegInf());
 }
-
 
 const int VAR_INVALID_INDEX = 0;
 
-}//.. end "namespace FuncParserNative"
+} // namespace FuncParserNative

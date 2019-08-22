@@ -2,32 +2,25 @@
 
 namespace FuncParserNative
 {
-	using namespace std;
+QuantityDimensionInfo::QuantityDimensionInfo(std::string quantityName,
+                                             const DimensionInfo &dimensionInfo)
+    : _quantityName(std::move(quantityName))
+    , _dimensionInfo(dimensionInfo)
+{}
 
-	QuantityDimensionInfo::QuantityDimensionInfo()
-	{
-	}
+const std::string &QuantityDimensionInfo::GetQuantityName() const
+{
+    return _quantityName;
+}
 
-	QuantityDimensionInfo::QuantityDimensionInfo(const string & quantityName, 
-	 	                                         const DimensionInfo & dimensionInfo)
-	{
-		_quantityName = quantityName;
-		_dimensionInfo = dimensionInfo;
-	}
+void QuantityDimensionInfo::SetQuantityName(std::string quantityName)
+{
+    _quantityName = std::move(quantityName);
+}
 
-	const string & QuantityDimensionInfo::GetQuantityName() const
-	{
-		return _quantityName;
-	}
+DimensionInfo QuantityDimensionInfo::GetDimensionInfo() const
+{
+    return _dimensionInfo;
+}
 
-	void QuantityDimensionInfo::SetQuantityName(const string & quantityName)
-	{
-		_quantityName = quantityName;
-	}
-
-	DimensionInfo QuantityDimensionInfo::GetDimensionInfo() const
-	{
-		return _dimensionInfo;
-	}
-
-}//.. end "namespace FuncParserNative"
+} // namespace FuncParserNative

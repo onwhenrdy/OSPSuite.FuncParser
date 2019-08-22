@@ -1,6 +1,5 @@
 #include "FuncParser/FuncParserErrorData.h"
 #include "FuncParser/ParsedFunction.h"
-#include "FuncParser/FuncNode.h"
 #include "FuncParser/Math.h"
 #include "FuncParser/FuncParser.h"
 #include "FuncParser/StringHelper.h"
@@ -13,57 +12,55 @@ namespace FuncParserNative
    void ParsedFunction::ResetParsedState(bool SimplifiedStateOnly /*= false*/)
    {
       _parametersSimplified = false;
-      if (_simplifiedNode != NULL)
+      if (_simplifiedNode)
       {
-         delete _simplifiedNode;
-         _simplifiedNode = NULL;
+          _simplifiedNode = nullptr;
       }
       if (SimplifiedStateOnly)
          return;
 
       _parsed = false;
-      if (_funcNode != NULL)
+      if (_funcNode)
       {
-         delete _funcNode;
-         _funcNode = NULL;
+          _funcNode = nullptr;
       }
    }
 
    IndexVector ParsedFunction::GetFixedParametersIndexVector(void)
    {
       IndexVector indexVector;
+      // estimate size to prevent too many allocations
+      indexVector.reserve(_fixedParameters.size() / 2);
 
-      size_t i, Index, k;
-      bool bNameValid, bAlreadyUsed;
-
-      for (i = 0; i < _fixedParameters.size(); i++)
+      for (auto i = 0; i < _fixedParameters.size(); i++)
       {
-         bNameValid = false;
-         for (Index = 0; Index < _parameterNames.size(); Index++)
-         {
-            if ((_caseSensitive && (_fixedParameters[i] == _parameterNames[Index])) ||
-               (!_caseSensitive && (FuncParser::ToUpper(_fixedParameters[i]) ==
-                  FuncParser::ToUpper(_parameterNames[Index]))))
-            {
-               bNameValid = true;
-               //check if fixed parameter name was already set (caller has used some parameter name twice or more
-               //In this case: don't raise an error, just ignore it
-               bAlreadyUsed = false;
-               for (k = 0; k < indexVector.size(); k++)
-                  if (indexVector[k] == Index)
+          for (auto Index = 0; Index < _parameterNames.size(); Index++)
+          {
+              if ((_caseSensitive && (_fixedParameters[i] == _parameterNames[Index]))
+                  || (!_caseSensitive
+                      && (FuncParser::ToUpper(_fixedParameters[i])
+                          == FuncParser::ToUpper(_parameterNames[Index]))))
+              {
+                  //check if fixed parameter name was already set (caller has used some parameter name twice or more
+                  //In this case: don't raise an error, just ignore it
+                  auto bAlreadyUsed = false;
+                  for (auto k = 0; k < indexVector.size(); k++)
                   {
-                     bAlreadyUsed = true;
-                     break;
+                      if (indexVector[k] == Index)
+                      {
+                          bAlreadyUsed = true;
+                          break;
+                      }
                   }
-               if (bAlreadyUsed)
+                  if (bAlreadyUsed)
+                      break;
+
+                  //Append an index of the fixed variable to the index list
+                  indexVector.push_back(Index);
+
                   break;
-
-               //Append an index of the fixed variable to the index list
-               indexVector.push_back(Index);
-
-               break;
-            }
-         }
+              }
+          }
       }
 
       return indexVector;
@@ -76,62 +73,38 @@ namespace FuncParserNative
 
       if (!_parametersSimplified)
       {
-         _simplifiedNode = _funcNode->Clone();
-         if (_simplifyParametersAllowed)
-         {
-            //get the indices of fixed parameters first
-            indexVector = GetFixedParametersIndexVector();
+          _simplifiedNode.reset(_funcNode->Clone());
+          if (_simplifyParametersAllowed)
+          {
+              //get the indices of fixed parameters first
+              indexVector = GetFixedParametersIndexVector();
 
-            //simplify WITH parameter values
-            //if parameter values are not set by now, so NULL is passed as the last argument
-            //Node simplifying routine checks for this and ignores parameter values in this case
-            _simplifiedNode->SimplifyNode(Dummy, indexVector, _comparisonTolerance, _parameterValues);
-         }
-         else
-         {
-            //simplify WITHOUT parameter values
-            _simplifiedNode->SimplifyNode(Dummy, indexVector, _comparisonTolerance);
-         }
-         _parametersSimplified = true;
+              //simplify WITH parameter values
+              //if parameter values are not set by now, so NULL is passed as the last argument
+              //Node simplifying routine checks for this and ignores parameter values in this case
+              _simplifiedNode->SimplifyNode(Dummy,
+                                            indexVector,
+                                            _comparisonTolerance,
+                                            _parameterValues.get());
+          } else
+          {
+              //simplify WITHOUT parameter values
+              _simplifiedNode->SimplifyNode(Dummy, indexVector, _comparisonTolerance);
+          }
+          _parametersSimplified = true;
       }
    }
 
    ParsedFunction::ParsedFunction()
+       : _caseSensitive(true)
+       , _logicOperatorsAllowed(true)
+       , _logicalNumericMixAllowed(false)
+       , _parametersSimplified(false)
+       , _parsed(false)
+       , _simplifyParametersAllowed(true)
+       , _comparisonTolerance(0.0)
+       , _parametersAvailable(false)
    {
-      _caseSensitive = true;
-      _funcNode = NULL;
-      _logicOperatorsAllowed = true;
-      _logicalNumericMixAllowed = false;
-      _parametersSimplified = false;
-      _parameterValues = NULL;
-      _parsed = false;
-      _simplifiedNode = NULL;
-      _simplifyParametersAllowed = true;
-      _comparisonTolerance = 0.0;
-      _parametersAvailable = false;
-   }
-
-   ParsedFunction::~ParsedFunction()
-   {
-      try
-      {
-         if (_funcNode != NULL)
-         {
-            delete _funcNode;
-            _funcNode = NULL;
-         }
-         if (_parameterValues != NULL)
-         {
-            delete[] _parameterValues;
-            _parameterValues = NULL;
-         }
-         if (_simplifiedNode != NULL)
-         {
-            delete _simplifiedNode;
-            _simplifiedNode = NULL;
-         }
-      }
-      catch (...) {}
    }
 
    bool ParsedFunction::GetCaseSensitive() const
@@ -154,10 +127,10 @@ namespace FuncParserNative
       return _variableNames;
    }
 
-   void ParsedFunction::SetVariableNames(const StringVector& variableNames)
+   void ParsedFunction::SetVariableNames(StringVector variableNames)
    {
-      _variableNames = variableNames;
-      ResetParsedState();
+       _variableNames = std::move(variableNames);
+       ResetParsedState();
    }
 
    const StringVector& ParsedFunction::GetParameterNames() const
@@ -165,25 +138,25 @@ namespace FuncParserNative
       return _parameterNames;
    }
 
-   void ParsedFunction::SetParameterNames(const StringVector& parameterNames)
+   void ParsedFunction::SetParameterNames(StringVector parameterNames)
    {
-      _parameterNames = parameterNames;
-      _parametersAvailable = (_parameterNames.size() > 0);
-      ResetParsedState();
-      _fixedParameters.clear();
+       _parameterNames = std::move(parameterNames);
+       _parametersAvailable = (_parameterNames.size() > 0);
+       ResetParsedState();
+       _fixedParameters.clear();
    }
 
-   const DoubleVector ParsedFunction::GetParameterValues() const
+   DoubleVector ParsedFunction::GetParameterValues() const
    {
       DoubleVector parameterValues;
 
-      size_t i;
+      if (_parameterValues == nullptr)
+          return parameterValues;
 
-      if (_parameterValues == NULL)
-         return parameterValues;
-
-      for (i = 0; i < _parameterNames.size(); i++)
-         parameterValues.push_back(_parameterValues[i]);
+      // only one allocation
+      parameterValues.reserve(_parameterNames.size());
+      for (auto i = 0; i < _parameterNames.size(); i++)
+          parameterValues.push_back(_parameterValues[i]);
 
       return parameterValues;
    }
@@ -192,22 +165,18 @@ namespace FuncParserNative
    {
       const char* ERROR_SOURCE = "ParsedFunction::SetParameterValues";
 
-      size_t i;
-
       if (parameterValues.size() != _parameterNames.size())
          throw FuncParserErrorData(FuncParserErrorData::err_BADARG, ERROR_SOURCE,
             "Number of parameter values differs from the number of parameter names");
 
       ResetParsedState(true);
-
       if (_parameterValues)
       {
-         delete[] _parameterValues;
-         _parameterValues = NULL;
+          _parameterValues = nullptr;
       }
-      _parameterValues = new double[parameterValues.size()];
-      for (i = 0; i < parameterValues.size(); i++)
-         _parameterValues[i] = parameterValues[i];
+      _parameterValues.reset(new double[parameterValues.size()]);
+      for (auto i = 0; i < parameterValues.size(); i++)
+          _parameterValues[i] = parameterValues[i];
    }
 
    bool ParsedFunction::GetSimplifyParametersAllowed()
@@ -280,11 +249,11 @@ namespace FuncParserNative
       return _stringToParse;
    }
 
-   void ParsedFunction::SetStringToParse(const std::string& stringToParse)
+   void ParsedFunction::SetStringToParse(std::string stringToParse)
    {
       if (stringToParse == _stringToParse)
          return;
-      _stringToParse = stringToParse;
+      _stringToParse = std::move(stringToParse);
       ResetParsedState();
    }
 
@@ -293,111 +262,92 @@ namespace FuncParserNative
       if (_parsed) return;
 
       FuncParser funcParser;
-
-      _funcNode = funcParser.Parse(_stringToParse, _variableNames, _parameterNames,
-         _caseSensitive, _logicOperatorsAllowed,
-         _comparisonTolerance, _logicalNumericMixAllowed);
+      _funcNode.reset(funcParser.Parse(_stringToParse,
+                                       _variableNames,
+                                       _parameterNames,
+                                       _caseSensitive,
+                                       _logicOperatorsAllowed,
+                                       _comparisonTolerance,
+                                       _logicalNumericMixAllowed));
 
       _parsed = true;
    }
 
    double ParsedFunction::CalcExpression(const DoubleVector& Arg)
    {
-      const std::string ERROR_SOURCE = "ParsedFunction::CalcExpression";
+       const std::string ERROR_SOURCE = "ParsedFunction::CalcExpression";
 
-      double* dArgs = NULL;
-      double dValue = Math::GetNaN();
-
-      try
-      {
-         size_t i;
-
-         //check arguments size
-         if (Arg.size() != _variableNames.size())
-            throw FuncParserErrorData(FuncParserErrorData::err_BADARG, ERROR_SOURCE,
+       //check arguments size
+       if (Arg.size() != _variableNames.size())
+           throw FuncParserErrorData(
+               FuncParserErrorData::err_BADARG,
+               ERROR_SOURCE,
                "Number of variable values differs from the number of variable names");
 
-         //check if Parameter values are available
-         if (_parameterNames.size() > 0)
-            if (_parameterValues == NULL)
-               throw FuncParserErrorData(FuncParserErrorData::err_BADARG, ERROR_SOURCE,
-                  "Parameter values are not set");
+       //check if Parameter values are available
+       if (_parameterNames.size() > 0 && !_parameterValues)
+           throw FuncParserErrorData(FuncParserErrorData::err_BADARG,
+                                     ERROR_SOURCE,
+                                     "Parameter values are not set");
 
-         if (!_parsed) //that is also checked in <Parse> itself. The check is done here
-                       //once more just to prevent an additional function call (time!!)
-         {
-            Parse();
-         }
+       //that is also checked in <Parse> itself. The check is done here
+       //once more just to prevent an additional function call (time!!)
+       if (!_parsed)
+       {
+           Parse();
+       }
 
-         dArgs = new double[Arg.size()];
-         for (i = 0; i < Arg.size(); i++)
-         {
-            dArgs[i] = Arg[i];
-         }
+       //that is also checked in <SimplifyParameters> itself. The check is done here
+       //once more just to prevent an additional function call (time!!)
+       if (!_parametersSimplified)
+       {
+           SimplifyParameters();
+       }
 
-         if (!_parametersSimplified) //that is also checked in <SimplifyParameters> itself. The check is done here
-                                      //once more just to prevent an additional function call (time!!)
-         {
-            SimplifyParameters();
-         }
+       // Arg ist guarateed to be contiguous in memory
+       auto dValue = _simplifiedNode->CalcNodeValue(Arg.data(),
+                                                    _parameterValues.get(),
+                                                    _comparisonTolerance);
 
-         dValue = _simplifiedNode->CalcNodeValue(dArgs, _parameterValues, _comparisonTolerance);
-
-         delete[] dArgs;
-         dArgs = NULL;
-
-      }
-      catch (...)
-      {
-         if (dArgs != NULL)
-         {
-            delete[] dArgs;
-            dArgs = NULL;
-         }
-         throw;
-      }
-
-      return dValue;
+       return dValue;
    }
 
    std::string ParsedFunction::GetXMLString(bool InSimplifiedState /*= true*/, const std::string& pContainerNodeName /*= "Rate"*/)
    {
-      const std::string ERROR_SOURCE = "ParsedFunction::GetXMLString";
-
-      std::string XMLString;
-
       if (!_parsed)
       {
          Parse();
       }
 
       std::string RateString;
-      FuncNode* Node2Expand = NULL;
+      FuncNode *Node2Expand = nullptr;
 
       if (InSimplifiedState)
       {
-         SimplifyParameters();
-
-         Node2Expand = _simplifiedNode;
+          SimplifyParameters();
+          Node2Expand = _simplifiedNode.get();
+      } else
+      {
+          Node2Expand = _funcNode.get();
       }
-      else
-         Node2Expand = _funcNode;
 
-      assert(Node2Expand != NULL);
-
+      assert(Node2Expand != nullptr);
       RateString = Node2Expand->XMLString(_variableNames, _parameterNames);
 
       std::string StringToParseAttr;
-      if ((_stringToParse.find_first_of("<") == std::string::npos) &&
-         (_stringToParse.find_first_of(">") == std::string::npos) &&
-         (_stringToParse.find_first_of("&") == std::string::npos) &&
-         (_stringToParse.find_first_of("'") == std::string::npos) &&
-         (_stringToParse.find_first_of("\"") == std::string::npos))
-         StringToParseAttr = " StringToParse=\"" + _stringToParse + "\" ";
-      else
-         StringToParseAttr = "";
-      XMLString = "<" + pContainerNodeName + StringToParseAttr + ">" +
-         RateString + "</" + pContainerNodeName + ">";
+      if ((_stringToParse.find_first_of("<") == std::string::npos)
+          && (_stringToParse.find_first_of(">") == std::string::npos)
+          && (_stringToParse.find_first_of("&") == std::string::npos)
+          && (_stringToParse.find_first_of("'") == std::string::npos)
+          && (_stringToParse.find_first_of("\"") == std::string::npos))
+      {
+          StringToParseAttr = " StringToParse=\"" + _stringToParse + "\" ";
+      } else
+      {
+          StringToParseAttr = "";
+      }
+      auto XMLString = "<" + pContainerNodeName + StringToParseAttr + ">" + RateString + "</"
+                       + pContainerNodeName + ">";
 
       return XMLString;
    }
@@ -413,24 +363,28 @@ namespace FuncParserNative
       {
 
          //check if Parameter values are available
-         if (_parametersAvailable)
-            if (_parameterValues == NULL)
-               throw FuncParserErrorData(FuncParserErrorData::err_BADARG, ERROR_SOURCE,
-                  "Parameter values are not set");
+         if (_parametersAvailable && !_parameterValues)
+             throw FuncParserErrorData(FuncParserErrorData::err_BADARG,
+                                       ERROR_SOURCE,
+                                       "Parameter values are not set");
 
-         if (!_parsed) //that is also checked in <Parse> itself. The check is done here
-                       //once more just to prevent an additional function call (time!!)
+         //that is also checked in <Parse> itself. The check is done here
+         //once more just to prevent an additional function call (time!!)
+         if (!_parsed)
          {
-            Parse();
+             Parse();
          }
 
-         if (!_parametersSimplified) //that is also checked in <SimplifyParameters> itself. The check is done here
-                                      //once more just to prevent a function call (time!!)
+         //that is also checked in <SimplifyParameters> itself. The check is done here
+         //once more just to prevent a function call (time!!)
+         if (!_parametersSimplified)
          {
-            SimplifyParameters();
+             SimplifyParameters();
          }
 
-         dValue = _simplifiedNode->CalcNodeValue(dArgs, _parameterValues, _comparisonTolerance);
+         dValue = _simplifiedNode->CalcNodeValue(dArgs,
+                                                 _parameterValues.get(),
+                                                 _comparisonTolerance);
       }
       catch (FuncParserErrorData& ED_)
       {
@@ -444,10 +398,10 @@ namespace FuncParserNative
       return dValue;
    }
 
-   void ParsedFunction::SetParametersNotToSimplify(const StringVector& parameterNames)
+   void ParsedFunction::SetParametersNotToSimplify(StringVector parameterNames)
    {
-      _fixedParameters = parameterNames;
-      ResetParsedState(true);
+       _fixedParameters = std::move(parameterNames);
+       ResetParsedState(true);
    }
 
    const StringVector& ParsedFunction::GetParametersNotToSimplify() const
@@ -458,64 +412,67 @@ namespace FuncParserNative
    DimensionInfo ParsedFunction::GetDimensionInfoFor(const std::string& formula,
       const std::vector<QuantityDimensionInfo>& quantityDimensions)
    {
-      const char* ERROR_SOURCE = "ParsedFunction::GetDimensionInfoFor";
 
       DimensionInfo dimensionInfo;
 
       try
       {
-         std::vector<std::string> variableNames;
-         std::vector<std::string> parameterNames = ExtractQuantityNames(quantityDimensions);
+          const auto parameterNames = ExtractQuantityNames(quantityDimensions);
 
-         SetCaseSensitive(true);
-         SetLogicalNumericMixAllowed(true);
-         SetLogicOperatorsAllowed(true);
+          SetCaseSensitive(true);
+          SetLogicalNumericMixAllowed(true);
+          SetLogicOperatorsAllowed(true);
 
-         //pass all quantities as parameters
-         SetParameterNames(parameterNames);
+          //pass all quantities as parameters
+          SetParameterNames(parameterNames);
 
-         //mark all parameters not for simplifying but allow simplifying itself,
-         //so only arithmetic expression like 2*sin(pi/3)+2
-         //will be simplified
-         SetParametersNotToSimplify(parameterNames);
+          //mark all parameters not for simplifying but allow simplifying itself,
+          //so only arithmetic expression like 2*sin(pi/3)+2
+          //will be simplified
+          SetParametersNotToSimplify(parameterNames);
 
-         SetSimplifyParametersAllowed(false);
+          SetSimplifyParametersAllowed(false);
+          SetStringToParse(formula);
+          Parse();
+          SimplifyParameters();
 
-         SetStringToParse(formula);
+          StringVector variableNames;
+          //pass dimension infos to the expression tree nodes
+          for (const auto qdim_info : quantityDimensions)
+          {
+              _simplifiedNode->SetDimensionInfo(qdim_info, variableNames, parameterNames);
+          }
 
-         Parse();
-
-         SimplifyParameters();
-
-         //pass dimension infos to the expression tree nodes
-         for (unsigned int idx = 0; idx < quantityDimensions.size(); idx++)
-            _simplifiedNode->SetDimensionInfo(quantityDimensions[idx],
-               variableNames, parameterNames);
-
-         //finally get dimension for the formula
-         dimensionInfo = _simplifiedNode->CalcNodeDimensionInfo();
-      }
-      catch (FuncParserErrorData& ED)
+          //finally get dimension for the formula
+          dimensionInfo = _simplifiedNode->CalcNodeDimensionInfo();
+      } catch (FuncParserErrorData &ED)
       {
          ED.SetDescription(ED.GetDescription() + " (Formula: " + formula + ")");
          throw ED;
       }
       catch (...)
       {
-         throw FuncParserErrorData(FuncParserErrorData::err_RUNTIME, ERROR_SOURCE, "Unknown error (Formula: " + formula + ")");
+          const char *ERROR_SOURCE = "ParsedFunction::GetDimensionInfoFor";
+          throw FuncParserErrorData(FuncParserErrorData::err_RUNTIME,
+                                    ERROR_SOURCE,
+                                    "Unknown error (Formula: " + formula + ")");
       }
 
       return dimensionInfo;
    }
 
-   std::vector<std::string> ParsedFunction::ExtractQuantityNames(const std::vector<QuantityDimensionInfo>& quantityDimensions)
+   std::vector<std::string> ParsedFunction::ExtractQuantityNames(
+       const std::vector<QuantityDimensionInfo> &quantityDimensions)
    {
-      std::vector<std::string> quantityNames;
+       std::vector<std::string> quantityNames;
+       quantityNames.reserve(quantityDimensions.size());
 
-      for (unsigned int i = 0; i < quantityDimensions.size(); i++)
-         quantityNames.push_back(quantityDimensions[i].GetQuantityName());
+       for (const auto &qdim_info : quantityDimensions)
+       {
+           quantityNames.push_back(qdim_info.GetQuantityName());
+       }
 
-      return quantityNames;
+       return quantityNames;
    }
 
    //-------------- C interface for PInvoke -----------------------------------------
@@ -526,9 +483,10 @@ namespace FuncParserNative
 
    void DisposeParsedFunction(ParsedFunction* parsedFunction)
    {
-      if (parsedFunction == NULL)
-         return;
-      delete parsedFunction;
+       if (parsedFunction)
+           return;
+
+       delete parsedFunction;
    }
 
    bool GetCaseSensitive(ParsedFunction* parsedFunction)
@@ -544,33 +502,40 @@ namespace FuncParserNative
    void SetVariableNames(ParsedFunction* parsedFunction, const char* variableNames[], int size)
    {
       StringVector vec;
-      
+      vec.reserve(size);
+
       for (auto i = 0; i < size; i++)
-         vec.push_back(variableNames[i]);
-      
-      parsedFunction->SetVariableNames(vec);
+          vec.push_back(variableNames[i]);
+
+      parsedFunction->SetVariableNames(std::move(vec));
    }
 
    void SetParameterNames(ParsedFunction* parsedFunction, const char* parameterNames[], int size)
    {
       StringVector vec;
+      vec.reserve(size);
 
       for (auto i = 0; i < size; i++)
-         vec.push_back(parameterNames[i]);
+          vec.push_back(parameterNames[i]);
 
-      parsedFunction->SetParameterNames(vec);
+      parsedFunction->SetParameterNames(std::move(vec));
    }
 
-   void SetParameterValues(ParsedFunction* parsedFunction, const double* parameterValues, int size, bool& success, char** errorMessage)
+   void SetParameterValues(ParsedFunction *parsedFunction,
+                           const double *parameterValues,
+                           int size,
+                           bool &success,
+                           char **errorMessage)
    {
       success = true;
 
       try
       {
          DoubleVector vec;
+         vec.reserve(size);
 
          for (auto i = 0; i < size; i++)
-            vec.push_back(parameterValues[i]);
+             vec.push_back(parameterValues[i]);
 
          parsedFunction->SetParameterValues(vec);
       }
@@ -586,18 +551,23 @@ namespace FuncParserNative
       }
    }
 
-   void SetParametersNotToSimplify(ParsedFunction* parsedFunction, const char* parameterNames[], int size, bool& success, char** errorMessage)
+   void SetParametersNotToSimplify(ParsedFunction *parsedFunction,
+                                   const char *parameterNames[],
+                                   int size,
+                                   bool &success,
+                                   char **errorMessage)
    {
       success = true;
 
       try
       {
          StringVector vec;
+         vec.reserve(size);
 
          for (auto i = 0; i < size; i++)
-            vec.push_back(parameterNames[i]);
+             vec.push_back(parameterNames[i]);
 
-         parsedFunction->SetParametersNotToSimplify(vec);
+         parsedFunction->SetParametersNotToSimplify(std::move(vec));
       }
       catch (FuncParserErrorData& ED)
       {
@@ -613,17 +583,17 @@ namespace FuncParserNative
 
    bool GetSimplifyParametersAllowed(ParsedFunction* parsedFunction)
    {
-      return parsedFunction->GetSimplifyParametersAllowed();
+       return parsedFunction->GetSimplifyParametersAllowed();
    }
 
    void SetSimplifyParametersAllowed(ParsedFunction* parsedFunction, bool simplifyParametersAllowed)
    {
-      parsedFunction->SetSimplifyParametersAllowed(simplifyParametersAllowed);
+       parsedFunction->SetSimplifyParametersAllowed(simplifyParametersAllowed);
    }
 
    bool GetLogicOperatorsAllowed(ParsedFunction* parsedFunction)
    {
-      return parsedFunction->GetLogicOperatorsAllowed();
+       return parsedFunction->GetLogicOperatorsAllowed();
    }
 
    void SetLogicOperatorsAllowed(ParsedFunction* parsedFunction, bool logicOperatorsAllowed)
@@ -646,7 +616,10 @@ namespace FuncParserNative
       return parsedFunction->GetComparisonTolerance();
    }
 
-   void SetComparisonTolerance(ParsedFunction* parsedFunction, double comparisonTolerance, bool& success, char** errorMessage)
+   void SetComparisonTolerance(ParsedFunction *parsedFunction,
+                               double comparisonTolerance,
+                               bool &success,
+                               char **errorMessage)
    {
       try
       {
@@ -702,9 +675,10 @@ namespace FuncParserNative
       try
       {
          DoubleVector argumentsVec;
+         argumentsVec.reserve(size);
 
          for (int i = 0; i < size; i++)
-            argumentsVec.push_back(arguments[i]);
+             argumentsVec.push_back(arguments[i]);
 
          return parsedFunction->CalcExpression(argumentsVec);
       }
@@ -722,7 +696,11 @@ namespace FuncParserNative
       return Math::GetNaN();
    }
 
-   char* GetXMLString(ParsedFunction* parsedFunction, bool& success, char** errorMessage, bool InSimplifiedState, const char* containerNodeName)
+   char *GetXMLString(ParsedFunction *parsedFunction,
+                      bool &success,
+                      char **errorMessage,
+                      bool InSimplifiedState,
+                      const char *containerNodeName)
    {
       success = true;
 

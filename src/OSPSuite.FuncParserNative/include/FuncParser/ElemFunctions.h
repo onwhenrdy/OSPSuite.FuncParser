@@ -6,11 +6,11 @@
 #pragma warning(disable:4786)
 #endif
 
-#include <map>
-#include <string>
-class string;
 #include "FuncParser/ElemFunction.h"
 #include "FuncParser/FuncParserTypeDefs.h"
+
+#include <map>
+#include <string>
 
 namespace FuncParserNative
 {
@@ -36,8 +36,8 @@ class ElemFunctions
 		bool Exists (ElemFunction::enmElemFunctionType FuncType);
 		const bool Exists (const std::string & Key);
 		const int GetCount ();
-		const std::string GetList (bool pLogical = false, bool bBinary = false) const;
-		static ElemFunctions * GetInstance ();
+        std::string GetList(bool pLogical = false, bool bBinary = false) const;
+        static ElemFunctions * GetInstance ();
 };
 
 }//.. end "namespace FuncParserNative"

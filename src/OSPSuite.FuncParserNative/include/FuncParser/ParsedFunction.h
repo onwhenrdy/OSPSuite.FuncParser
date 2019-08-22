@@ -1,48 +1,50 @@
 #ifndef _ParsedFunction_H_
 #define _ParsedFunction_H_
 
-#include "FuncParser/QuantityDimensionInfo.h"
+#include "FuncParser/FuncNode.h"
 #include "FuncParser/FuncParserTypeDefs.h"
+#include "FuncParser/QuantityDimensionInfo.h"
+
+#include <memory>
 
 namespace FuncParserNative
 {
-
-   class FuncNode;
    class FuncParserErrorData;
 
    class ParsedFunction
    {
    private:
-      FuncNode* _funcNode;
-      FuncNode* _simplifiedNode;
-      bool _caseSensitive;
-      StringVector _variableNames;
-      StringVector _parameterNames;
-      StringVector _fixedParameters;
-      double* _parameterValues;
-      bool _simplifyParametersAllowed;
-      bool _logicOperatorsAllowed;
-      bool _logicalNumericMixAllowed;
-      bool _parsed;
-      double _comparisonTolerance;
-      bool _parametersSimplified;
-      std::string _stringToParse;
-      bool _parametersAvailable;
-      void ResetParsedState(bool simplifiedStateOnly = false);
-      IndexVector GetFixedParametersIndexVector();
-      void SimplifyParameters();
-      std::vector<std::string> ExtractQuantityNames(const std::vector<QuantityDimensionInfo>& quantityDimensions);
+       std::unique_ptr<FuncNode> _funcNode;
+       std::unique_ptr<FuncNode> _simplifiedNode;
+       bool _caseSensitive;
+       StringVector _variableNames;
+       StringVector _parameterNames;
+       StringVector _fixedParameters;
+       std::unique_ptr<double[]> _parameterValues;
+       bool _simplifyParametersAllowed;
+       bool _logicOperatorsAllowed;
+       bool _logicalNumericMixAllowed;
+       bool _parsed;
+       double _comparisonTolerance;
+       bool _parametersSimplified;
+       std::string _stringToParse;
+       bool _parametersAvailable;
+
+       void ResetParsedState(bool simplifiedStateOnly = false);
+       IndexVector GetFixedParametersIndexVector();
+       void SimplifyParameters();
+       std::vector<std::string> ExtractQuantityNames(
+           const std::vector<QuantityDimensionInfo> &quantityDimensions);
 
    public:
       FUNCPARSER_EXPORT ParsedFunction();
-      FUNCPARSER_EXPORT ~ParsedFunction();
       FUNCPARSER_EXPORT bool GetCaseSensitive() const;
       FUNCPARSER_EXPORT void SetCaseSensitive(bool caseSensitive);
       FUNCPARSER_EXPORT const StringVector& GetVariableNames() const;
-      FUNCPARSER_EXPORT void SetVariableNames(const StringVector& variableNames);
+      FUNCPARSER_EXPORT void SetVariableNames(StringVector variableNames);
       FUNCPARSER_EXPORT const StringVector& GetParameterNames() const;
-      FUNCPARSER_EXPORT void SetParameterNames(const StringVector& parameterNames);
-      FUNCPARSER_EXPORT const DoubleVector GetParameterValues() const;
+      FUNCPARSER_EXPORT void SetParameterNames(StringVector parameterNames);
+      FUNCPARSER_EXPORT DoubleVector GetParameterValues() const;
       FUNCPARSER_EXPORT void SetParameterValues(const DoubleVector& parameterValues);
       FUNCPARSER_EXPORT bool GetSimplifyParametersAllowed();
       FUNCPARSER_EXPORT void SetSimplifyParametersAllowed(bool simplifyParametersAllowed);
@@ -53,12 +55,12 @@ namespace FuncParserNative
       FUNCPARSER_EXPORT double GetComparisonTolerance();
       FUNCPARSER_EXPORT void SetComparisonTolerance(double comparisonTolerance);
       FUNCPARSER_EXPORT const std::string GetStringToParse() const;
-      FUNCPARSER_EXPORT void SetStringToParse(const std::string& stringToParse);
+      FUNCPARSER_EXPORT void SetStringToParse(std::string stringToParse);
       FUNCPARSER_EXPORT void Parse();
       FUNCPARSER_EXPORT double CalcExpression(const DoubleVector& Arg);
       FUNCPARSER_EXPORT std::string GetXMLString(bool InSimplifiedState = true, const std::string& pContainerNodeName = "Rate");
       FUNCPARSER_EXPORT double CalcExpression(double* dArgs, FuncParserErrorData& ED);
-      FUNCPARSER_EXPORT void SetParametersNotToSimplify(const StringVector& parameterNames);
+      FUNCPARSER_EXPORT void SetParametersNotToSimplify(StringVector parameterNames);
       FUNCPARSER_EXPORT const StringVector& GetParametersNotToSimplify() const;
 
       DimensionInfo GetDimensionInfoFor(const std::string& formula,

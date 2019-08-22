@@ -19,17 +19,11 @@
 
 namespace FuncParserNative
 {
+using StringVector = std::vector<std::string>;
+using StringVectorIterator = std::vector<std::string>::iterator;
+using DoubleVector = std::vector<double>;
+using IndexVector = std::vector<size_t>;
 
-typedef std::vector < std::string > StringVector;
-
-typedef std::vector < std::string >::iterator StringVectorIterator;
-
-typedef std::vector < double > DoubleVector;
-
-typedef std::vector < size_t > IndexVector;
-
-}//.. end "namespace FuncParserNative"
-
+} // namespace FuncParserNative
 
 #endif //_FuncParserTypeDefs_H_
-

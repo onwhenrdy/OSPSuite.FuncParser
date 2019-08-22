@@ -10,8 +10,8 @@ namespace FuncParserNative
 class DimensionParser
 {
 public:
-	static DimensionInfo GetDimensionInfoFor(const std::string & formula,
-		                                      const std::vector<QuantityDimensionInfo> & quantityDimensions);
+    static DimensionInfo GetDimensionInfoFor(
+        const std::string &formula, const std::vector<QuantityDimensionInfo> &quantityDimensions);
 };
 
 //-------------- C interface for PInvoke -----------------------------------------

@@ -223,7 +223,9 @@ namespace FuncParserNative
       return newNode;
    }
 
-   const double FuncNode::CalcNodeValue(double* Args, double* Params, double ComparisonTolerance)
+   const double FuncNode::CalcNodeValue(const double *Args,
+                                        double *Params,
+                                        double ComparisonTolerance)
    {
       assert(_nodeType != NT_INVALID);
 

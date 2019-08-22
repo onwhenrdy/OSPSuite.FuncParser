@@ -14,7 +14,7 @@ namespace FuncParserNative
 class StringHelper
 {	
 	public:
-		static std::string Capitalize (const std::string & pInString);
+        static std::string Capitalize(std::string pInString);
 };
 
 }//.. end "namespace FuncParserNative"

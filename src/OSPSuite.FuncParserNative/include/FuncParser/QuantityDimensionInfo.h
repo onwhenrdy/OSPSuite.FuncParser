@@ -11,18 +11,16 @@ class QuantityDimensionInfo
 {
 protected:
 	std::string _quantityName;
-	DimensionInfo _dimensionInfo;
+    DimensionInfo _dimensionInfo;
 
-	public:
-		QuantityDimensionInfo();
+public:
+    FUNCPARSER_EXPORT QuantityDimensionInfo(std::string quantityName,
+                                            const DimensionInfo &dimensionInfo);
 
-		FUNCPARSER_EXPORT QuantityDimensionInfo(const std::string & quantityName, 
-			                                    const DimensionInfo & dimensionInfo);
+    FUNCPARSER_EXPORT const std::string &GetQuantityName() const;
+    FUNCPARSER_EXPORT void SetQuantityName(std::string quantityName);
 
-		FUNCPARSER_EXPORT const std::string & GetQuantityName() const;
-		FUNCPARSER_EXPORT void SetQuantityName(const std::string & quantityName);
-
-		FUNCPARSER_EXPORT DimensionInfo GetDimensionInfo() const;
+    FUNCPARSER_EXPORT DimensionInfo GetDimensionInfo() const;
 };
 
 }//.. end "namespace FuncParserNative"

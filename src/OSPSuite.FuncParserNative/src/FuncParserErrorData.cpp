@@ -2,22 +2,20 @@
 
 namespace FuncParserNative
 {
-
-FuncParserErrorData::FuncParserErrorData ()
+FuncParserErrorData::FuncParserErrorData()
+    : _number(err_OK)
 {
-	_number = err_OK;
-	_source = "";
-	_description = "";
 }
 
-FuncParserErrorData::FuncParserErrorData (errNumber Number, const std::string & Source, const std::string & Description)
-{
-	_number = Number;
-	_source = Source;
-	_description = Description;
-}
+FuncParserErrorData::FuncParserErrorData(errNumber Number,
+                                         std::string Source,
+                                         std::string Description)
+    : _source(std::move(Source))
+    , _description(std::move(Description))
+    , _number(Number)
+{}
 
-const FuncParserErrorData::errNumber FuncParserErrorData::GetNumber () const
+FuncParserErrorData::errNumber FuncParserErrorData::GetNumber() const
 {
     return _number;
 }
@@ -27,46 +25,38 @@ void FuncParserErrorData::SetNumber (errNumber number)
     _number=number;
 }
 
-const std::string FuncParserErrorData::GetSource () const
+const std::string &FuncParserErrorData::GetSource() const
 {
     return _source;
 }
 
-void FuncParserErrorData::SetSource (const std::string & source)
+void FuncParserErrorData::SetSource(std::string source)
 {
-    _source=source;
+    _source = std::move(source);
 }
 
-const std::string FuncParserErrorData::GetDescription () const
+const std::string &FuncParserErrorData::GetDescription() const
 {
     return _description;
 }
 
-void FuncParserErrorData::SetDescription (const std::string & description)
+void FuncParserErrorData::SetDescription(std::string description)
 {
-    _description=description;
+    _description = std::move(description);
 }
 
-void FuncParserErrorData::operator = (const FuncParserErrorData & ED)
+void FuncParserErrorData::SetError(errNumber Number, std::string Source, std::string Description)
 {
-	_number = ED.GetNumber();
-	_description = ED.GetDescription();
-	_source = ED.GetSource();
-}
-
-void FuncParserErrorData::SetError (errNumber Number, const std::string & Source, const std::string & Description)
-{
-	_number = Number;
-	_description = Description;
-	_source = Source;
+    _number = Number;
+    _description = std::move(Description);
+    _source = std::move(Source);
 }
 
 void FuncParserErrorData::Clear ()
 {
-	_number = err_OK;
-	_description = "";
-	_source = "";
+    _number = err_OK;
+    _description.clear();
+    _source.clear();
 }
 
-
-}//.. end "namespace FuncParserNative"
+} // namespace FuncParserNative
