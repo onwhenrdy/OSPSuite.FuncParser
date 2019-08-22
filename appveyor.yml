@@ -28,7 +28,7 @@ before_build:
   - sh: mkdir -p Build/Debug/x64; mkdir -p Build/Release/x64
 
 after_build:
-  - cmd: nuget pack src\OSPSuite.FuncParser\OSPSuite.FuncParser.nuspec -version $app_version
+  - cmd: nuget pack src\OSPSuite.FuncParser\OSPSuite.FuncParser.nuspec -version %app_version%
   - sh: nuget pack src\OSPSuite.FuncParser\OSPSuite.FuncParserUbuntu18.nuspec -version $app_version
   - ps: Get-ChildItem .\OSPSuite.FuncParser*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
