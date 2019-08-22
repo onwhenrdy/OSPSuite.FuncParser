@@ -1,28 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <RunPostBuildEvent>Always</RunPostBuildEvent>
-
     <RootNamespace>OSPSuite.FuncParser.Tests</RootNamespace>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Users\domin\OneDrive\Dokumente\Projekte\OSPSuite.FuncParser\Backup\tests\OSPSuite.FuncParser.Tests\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
     <PackageReference Include="OSPSuite.BDDHelper" Version="4.0.0.1" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\OSPSuite.FuncParser\OSPSuite.FuncParser.csproj" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.dll&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.pdb&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.lib&quot; &quot;$(ProjectDir)$(OutDir)&quot;" />
-  </Target>
+  <Target Name="PostBuildLinux" AfterTargets="PostBuildEvent" Condition=" '$(OS)' != 'Windows_NT' " >
+		<Exec Command="cp '$(SolutionDir)Build/$(ConfigurationName)/x64/libOSPSuite.FuncParserNative.so' '$(ProjectDir)$(OutDir)'" />
+	</Target>
+	<Target Name="PostBuildWindows" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
+		<Exec Command="copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.dll&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.pdb&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.lib&quot; &quot;$(ProjectDir)$(OutDir)&quot;" />
+	</Target>
 
 </Project>
