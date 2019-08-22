@@ -18,14 +18,16 @@
     <ProjectReference Include="..\..\src\OSPSuite.FuncParser\OSPSuite.FuncParser.csproj" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Choose> 
-			<When Condition=" '$(OS)' == 'Unix' ">
+  <Choose> 
+		<When Condition=" '$(OS)' == 'Unix' ">
+			<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 				<Exec Command="cp '$(SolutionDir)Build/$(ConfigurationName)/x64/libOSPSuite.FuncParserNative.so' '$(ProjectDir)$(OutDir)'" />
-			</When>
-			<When Condition=" '$(OS)' != 'Unix' ">
+			</Target>
+		</When>
+		<When Condition=" '$(OS)' != 'Unix' ">
+			<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 				<Exec Command="copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.dll&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.pdb&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.lib&quot; &quot;$(ProjectDir)$(OutDir)&quot;" />
-			</When>
-		</Choose> 
-	</Target>
+			</Target>
+		</When>
+	</Choose>
 </Project>
