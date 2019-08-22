@@ -21,5 +21,4 @@
     <Exec Command="copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.dll&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.pdb&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;copy &quot;$(SolutionDir)Build\$(ConfigurationName)\x64\OSPSuite.FuncParserNative.lib&quot; &quot;$(ProjectDir)$(OutDir)&quot;" Condition=" '$(OS)' != 'Unix' "/>
     <Exec Command="cp '$(SolutionDir)Build/$(ConfigurationName)/x64/libOSPSuite.FuncParserNative.so' '$(ProjectDir)$(OutDir)'" Condition=" '$(OS)' == 'Unix' "/>
   </Target>
-  </Target>
 </Project>
